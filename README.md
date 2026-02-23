@@ -1,16 +1,76 @@
-# login_with_rive_animation
+# 🐻 Animated Bear Login
 
-A new Flutter project.
+Welcome to **Animated Bear Login** — a modern Flutter login interface enhanced with interactive Rive animations and state machine logic for a smooth and engaging user experience.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 👤 Project Information
 
-A few resources to get you started if this is your first Flutter project:
+- **Name:** Juan Carlos Castelan Ake  
+- **Teacher:** Rodrigo Fidel Gaxiola Sosa  
+- **Subject:** Graficación  
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📌 Description
+
+🚀 This project showcases a modern login screen built with **Flutter**, integrated with **Rive** animations powered by a **State Machine**.  
+
+The animated bear reacts dynamically to user interactions, creating a playful yet functional authentication experience.
+
+The goal of this project is to demonstrate how real-time animations can improve user experience through interaction-driven design.
+
+---
+
+## 🌟 Features
+
+- 🔒 Password visibility toggle  
+- 👀 Animated reactions to user actions (typing, checking, success, error)  
+- 🎯 Interactive State Machine logic  
+- 💡 Clean UI built with Flutter’s Material components  
+- ⏳ Responsive behavior using timers and animation triggers  
+
+---
+
+## 🎨 What is Rive?
+
+Rive is a real-time interactive animation tool and runtime that allows developers and designers to create lightweight, high-performance vector animations for web, mobile, and game applications.  
+
+Unlike traditional animations (such as GIFs or pre-rendered videos), Rive animations are **dynamic and state-driven**. This means they can respond to user interactions, application logic, and real-time data.  
+
+Because animations are rendered programmatically, they are optimized for performance and ideal for modern, interactive user interfaces.
+
+### Common Use Cases:
+- ✨ Interactive UI elements  
+- 🎮 Game animations  
+- 📱 Mobile app micro-interactions  
+- 🌐 Web-based animations  
+
+---
+
+## 🔄 What is a State Machine in Rive?
+
+A **State Machine** in Rive controls how and when animations transition between different states. Instead of playing a single linear animation, it allows you to define multiple states such as:
+
+- `idle`
+- `hover`
+- `pressed`
+- `success`
+- `error`
+
+Transitions between these states are triggered using:
+
+- ✅ Boolean inputs  
+- 🔢 Numeric inputs  
+- 🚀 Trigger inputs  
+
+This enables animations to react automatically to user interactions or application events.
+
+For example, in this project:
+- The bear looks at the text field while typing 👀  
+- Covers its eyes when entering a password 🙈  
+- Reacts differently on success or error ✅❌  
+
+In short, **State Machines make Rive animations interactive, responsive, and deeply integrated with application logic.**
+
+
