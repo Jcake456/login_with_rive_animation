@@ -108,6 +108,6 @@ This structure keeps the project organized by separating:
 
 ## 🎥 Demo
 
-login_with_animation_5sa/
-├── assets/
-│   └── Grabación 2026-02-23 174126.gif
+<p align="center">
+  <img src="assets/bear_login_demo.gif" width="300" alt="Animated Bear Login Demo">
+</p>
