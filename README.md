@@ -73,4 +73,41 @@ For example, in this project:
 
 In short, **State Machines make Rive animations interactive, responsive, and deeply integrated with application logic.**
 
+🛠️ __Technologies Used__
 
+🧩 Flutter — UI framework
+
+🎬 Rive — animation integration
+
+🧠 StateMachineController — for handling animation logic
+
+💻 Dart — programming language
+
+---
+
+## 📂 Project Structure
+
+Below is the folder structure of the project:
+
+```bash
+login_with_animation_5sa/
+├── assets/
+│   └── rive/                 # Rive animation file (.riv)
+├── lib/
+│   ├── main.dart             # Application entry point
+│   └── screens/
+│       └── login_screen.dart # Login screen with bear animation
+└── pubspec.yaml              # Dependencies and assets configuration
+```
+
+This structure keeps the project organized by separating:
+- 🎨 Animation assets  
+- 🧠 Application logic  
+- 🖥️ UI screens  
+- 📦 Dependency configuration
+
+## 🎥 Demo
+
+login_with_animation_5sa/
+├── assets/
+│   └── Grabación 2026-02-23 174126.gif
