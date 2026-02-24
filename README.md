@@ -108,6 +108,15 @@ This structure keeps the project organized by separating:
 
 ## 🎥 Demo
 
+## 🎥 Demo
+
 <p align="center">
-  <img src="assets/bear_login_demo.gif" width="300" alt="Animated Bear Login Demo">
+  <img src="assets/Grabación%202026-02-23%20174126.gif" width="800" alt="Animated Bear Login Demo">
 </p>
+
+
+---
+
+## ⚙️ Animation Creator
+
+Rive animation used in this project: [Remix of Login Machine](https://rive.app/marketplace/3645-7621-remix-of-login-machine/)
