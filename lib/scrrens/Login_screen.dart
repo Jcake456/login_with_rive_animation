@@ -33,6 +33,62 @@ class _LoginScreenState extends State<LoginScreen> {
   //3.1 timer para detener mirada 
   Timer? _typingDebounce;
 
+  // 4.1 controllers para manipular texto escrito
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  //4.2 errores para mostrar en la ui
+  String? _emailError;
+  String? _passwordError;
+
+  // 4.3 Validadores
+  bool isValidEmail(String email) {
+    final re = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
+    return re.hasMatch(email);
+  }
+
+  bool isValidPassword(String pass) {
+    // mínimo 8, una mayúscula, una minúscula, un dígito y un especial
+    final re = RegExp(
+      r'^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[^A-Za-z0-9]).{8,}$',
+    );
+    return re.hasMatch(pass);
+  }
+
+  // 4.4 Acción al botón
+  void _onLogin() {
+  final email = _emailController.text.trim(); //elimina espacios en blanco
+  final pass = _passwordController.text;
+
+    // Recalcular errores
+    final eError = isValidEmail(email) ? null : 'Email inválido';
+    final pError =
+        isValidPassword(pass)
+            ? null
+            : 'Mínimo 8 caracteres, 1 mayúscula,  1 minúscula, 1 número y 1 caracter especial';
+
+    // 4.5 Para avisar que hubo un cambio
+    setState(() {
+    _emailError = eError;
+    _passwordError = pError;
+    });
+
+    // 4.6 Cerrar el teclado y bajar manos
+    FocusScope.of(context).unfocus();
+    _typingDebounce?.cancel();
+    _isChecking?.change(false);
+    _isHandsUp?.change(false);
+    _numLook?.value = 50.0; // Mirada neutral
+
+    // 4.7 Activar triggers
+    if (eError == null && pError == null) {
+      _trigSuccess?.fire();
+    } else {
+      _trigFail?.fire();
+    }
+  }
+
+
   
   //paso 1.2: Listenrs para FocusNodes (Oyentes/Chismosos)
   @override
@@ -57,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;//obtenemos el tamaño de la pantalla para ajustar la animación y los campos de texto
     return Scaffold(
-      body: SafeArea(
+      body: SingleChildScrollView(   //Error de overflow
         child: Padding( //agregamos un padding para que la animación y los campos de texto no estén pegados a los bordes de la pantalla
           padding: const EdgeInsets.symmetric(horizontal: 20.0),//padding horizontal de 20 para que la animación y los campos de texto no estén pegados a los bordes de la pantalla
           child: Column(
@@ -80,6 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 )),
               const SizedBox(height: 10), //separación entre la animación y el campo de email
               TextField(
+                controller: _emailController, //asociamos el controlador de texto al campo de email
                 //paso 1.3: asociar los focusNodes a los campos de texto
                 focusNode: _emailFocusNode,
                 onChanged: (value){
@@ -117,6 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 },
                 decoration: InputDecoration(
+                  errorText: _emailError,
                   hintText: 'Email',
                   prefixIcon: const Icon(Icons.email),//icono de email para el campo de email
                   border: OutlineInputBorder(
@@ -126,6 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 10), //separación entre el campo de email y el campo de password
               TextField(
+                controller: _passwordController, //asociamos el controlador de texto al campo de password
                 //paso 1.3: asociar los focusNodes a los campos de texto
                 focusNode: _passwordFocusNode,
                 onChanged: (value){
@@ -140,6 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 obscureText: _obscureText, //ocultamos la contraseña por defecto  
                 decoration: InputDecoration(
+                  errorText: 'Password',
                   hintText: 'Password',
                   prefixIcon: const Icon(Icons.lock),//icono de candado para el campo de password
                   suffixIcon: IconButton(
@@ -159,8 +219,49 @@ class _LoginScreenState extends State<LoginScreen> {
                   )
                 ),
               ),
-              const SizedBox(height: 10), //separación entre el campo de password y el botón de login
-              ]
+              const SizedBox(height: 10), //separación entre el campo de password y el botón de login      
+                    //texto de "olvide mi contraseña"
+                    SizedBox(width:size.width,
+                      child: const Text (
+                        "forgot password?",
+                        //alinearlo a la derecha
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          decoration:TextDecoration.underline, //subrayado para indicar que es un enlace
+                        ),
+                      )),
+                MaterialButton(
+                minWidth: size.width,
+                height: 50,
+                color: Colors.blueAccent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)
+                ),
+                onPressed: (){},
+                child: Text("Login", style: TextStyle(
+                  color: Colors.white),
+                ),
+                ),       
+                SizedBox(
+                width: size.width,
+                child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                    const Text("Don't have an account?"),
+                    TextButton(
+                      onPressed: (){},
+                      child: const Text("Register",
+                      style: TextStyle(
+                        color: Colors.blueAccent,
+                        decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.bold,
+                      )),
+                    ),
+                   ],
+                  ),
+                ),
+              ],
+              
           ),
         )
       ),
@@ -170,6 +271,9 @@ class _LoginScreenState extends State<LoginScreen> {
   //paso 1.4: limpiar los focusNodes para evitar fugas de memoria
   @override
   void dispose() {
+    //4.11 liberar controller
+    _emailController.dispose();
+    _passwordController.dispose();
     //limpiar los focusNodes para evitar fugas de memoria
     _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
