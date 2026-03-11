@@ -111,7 +111,7 @@ This structure keeps the project organized by separating:
 ## 🎥 Demo
 
 <p align="center">
-  <img src="assets/Grabación%202026-02-23%20174126.gif" width="800" alt="Animated Bear Login Demo">
+  <img src="assets/Grabación 2026-03-10 221719" width="800" alt="Animated Bear Login Demo">
 </p>
 
 
